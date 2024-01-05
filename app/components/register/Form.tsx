@@ -83,12 +83,12 @@ const Form = () => {
     const generatedPromptsString = await generatePrompts(question);
     console.log(generatedPromptsString);
     try {
-      const good_enough = await checkRegistrationPrompt(question)
-      if (!good_enough) {
-        throw new Error(
-          "Please make your narration more defined and personal to you."
-        );
-      }
+      // const good_enough = await checkRegistrationPrompt(question)
+      // if (!good_enough) {
+      //   throw new Error(
+      //     "Please make your narration more defined and personal to you."
+      //   );
+      // }
       const res = await fetch("/api/auth/register", {
         method: "POST",
         headers: {
@@ -130,7 +130,7 @@ const Form = () => {
     <>
       <form className="" onSubmit={handleSubmit} autoComplete="off">
         <div className={`text-[34px] ${poppins600.className} mb-3`}>
-          Registerrrr with your email
+          Register with your email
         </div>
         <div className={`${poppins400.className}`}>
           <div className="relative z-0 w-[100%] mb-5 group">
