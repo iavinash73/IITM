@@ -12,9 +12,7 @@ export default async function Dashboard() {
     email: session.user?.email,
   });
 
-  if (!user.details) {
-    redirect("/register/?callbackUrl=/dashboard");
-  }
+
   return (
     <main className="flex flex-col justify-center items-center h-screen">
       <h2>

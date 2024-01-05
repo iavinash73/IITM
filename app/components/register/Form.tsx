@@ -37,7 +37,7 @@ const Form = () => {
   const session = useSession();
 
   if (session.status === "authenticated") {
-    router?.push("/question");
+    router?.push("/dashboard");
   }
 
   const [formData, setFormData] = useState({
