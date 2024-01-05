@@ -1,4 +1,5 @@
 "use client";
+import { generatePrompts } from "@/app/actions/replicate/generatePrompts";
 import { Button } from "@/app/components/button/Button";
 import eye from "@/public/auth/eye.png";
 import eyec from "@/public/auth/eyec.png";
@@ -80,6 +81,7 @@ const Form = () => {
 
   const formSubmit = async (form: any) => {
     const { name, email, password,question } = form;
+    const generatedPromptsString = await generatePrompts(question);
     try {
       const res = await fetch("/api/auth/register", {
         method: "POST",
@@ -90,8 +92,8 @@ const Form = () => {
           name,
           email,
           password,
-          question
-        }),
+          question: generatedPromptsString,
+        }), 
       });
 
       if (res.status === 201) {

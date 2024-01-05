@@ -18,28 +18,35 @@ const page: FC<pageProps> = async ({}) => {
   }
   let user = await User.findOne({ email: session.user?.email });
   // console.log(session.user?.email);
-  const image = await generateImage(user.question);
+  const questions = JSON.parse(user.question);
+  const image1 = await generateImage(questions[0]);
+  const image2 = await generateImage(questions[2]);
+  console.log(image1[0])
+  console.log(image2[0])
   return (
-    <>
-      <div className="relative h-screen w-screen items-center justify-center flex">
+    <div className="p-[5rem]">
+        <div className="flex items-center justify-center w-full space-x-10 mb-5">
         <Image
-          fill={true}
-          alt="background image"
-          src={bg}
-          className="object-cover z-[-1]"
-        ></Image>
-        <div className="p-10 backdrop-blur-sm bg-white bg-opacity-[0.15] rounded-xl flex items-center justify-center flex-col">
-          <Image
-            src={image[0]}
-            width={500}
-            height={500}
+            src={image1[0]}
+            width={400}
+            height={400}
             alt="prompt"
             className="rounded-3xl"
           />
-          {session.user?.email ? <Form email={session.user?.email} /> : ""}
+          <div className="bg-slate-200 w-[400px] h-[400px] rounded-3xl">
+
+          </div>
+          <Image
+            src={image2[0]}
+            width={400}
+            height={400}
+            alt="prompt"
+            className="rounded-3xl"
+          />
         </div>
-      </div>
-    </>
+        {session.user?.email ? <Form email={session.user?.email} /> : ""}
+
+    </div>
   );
 };
 
