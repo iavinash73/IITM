@@ -17,7 +17,7 @@ const page: FC<pageProps> = async ({}) => {
   console.log(user.question);
   const image = await generateImage(user.question);
   console.log(image);
-  return <div className='items-center flex h-screen'>
+  return <div className='flex items-center justify-center h-screen'>
     <Image src={image[0]} width={500} height={500} alt="prompt" />
   </div>
 };
