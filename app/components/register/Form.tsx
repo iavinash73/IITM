@@ -38,7 +38,7 @@ const Form = () => {
   const session = useSession();
 
   if (session.status === "authenticated") {
-    router?.push("/dashboard");
+    router?.push("/sample");
   }
 
   const [formData, setFormData] = useState({
@@ -212,7 +212,7 @@ const Form = () => {
               )}
             </button>
           </div>
-          <div className="">Give a description that only you would know.(50 words minimum)</div>
+          <div className="text-black">Give a description that only you would know.(50 words minimum)</div>
           <div>This will be used to verify you when you login</div>
 
           <div className="relative z-0 w-[100%] mb-5 group mt-4">

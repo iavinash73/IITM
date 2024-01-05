@@ -118,10 +118,7 @@ const Form = () => {
         </div>
         <p className={`w-full text-[13px] ${poppins400.className}`}>
           <Link href="/register" className="hover:underline block">
-            Don't have an account?
-          </Link>
-          <Link href="/forgot-password" className="hover:underline block mt-1">
-            Forgot password
+            Don&lsquo;t have an account?
           </Link>
         </p>
         <div className="w-full items-center flex justify-center ">
