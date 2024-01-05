@@ -15,6 +15,10 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    question: {
+      type: String,
+      default: false,
+    },
     forgotPasswordToken: {
       type: String,
     },
@@ -22,10 +26,6 @@ const UserSchema = new mongoose.Schema(
       type: Date,
     },
     emailVerified: {
-      type: Boolean,
-      default: false,
-    },
-    details: {
       type: Boolean,
       default: false,
     },

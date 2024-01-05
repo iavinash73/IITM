@@ -45,28 +45,41 @@ const Form = () => {
     email: "",
     password: "",
     repeatPassword: "",
+    question:""
   });
 
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    const { name, email, password, repeatPassword } = formData;
+    const { name, email, password, repeatPassword,question } = formData;
     try {
+      var wordsArray = question.split(/\s+/);
+      console.log(wordsArray.length);
       if (password !== repeatPassword) {
         throw new Error("Your passwords don't match !!");
-      } else {
+      }
+      // else if(wordsArray.length< 50)
+      // {
+      //   throw new Error("Desciption is less than 50 words!!");
+      // }
+       else {
+        // console.log(formData);
         formSubmit(formData);
       }
     } catch (error: any) {
       if (error.message === "Your passwords don't match !!") {
         toast.error(error.message);
-      } else {
+      } 
+      else if (error.message === "Desciption is less than 50 words!!") {
+        toast.error(error.message);
+      } 
+      else {
         console.error(error);
       }
     }
   };
 
   const formSubmit = async (form: any) => {
-    const { name, email, password } = form;
+    const { name, email, password,question } = form;
     try {
       const res = await fetch("/api/auth/register", {
         method: "POST",
@@ -77,6 +90,7 @@ const Form = () => {
           name,
           email,
           password,
+          question
         }),
       });
 
@@ -85,7 +99,8 @@ const Form = () => {
           email,
           password,
         });
-      } else {
+      } 
+      else {
         const errorData = await res.json();
         if (errorData.error === "User Already Exists") {
           toast.error("User already exists. Please choose a different email.");
@@ -194,6 +209,26 @@ const Form = () => {
                 <Image height={20} width={20} alt="open_eye" src={eyec}></Image>
               )}
             </button>
+          </div>
+          <div className="">Give a description that only you would know.(50 words minimum)</div>
+          <div>This will be used to verify you when you login</div>
+
+          <div className="relative z-0 w-[100%] mb-5 group mt-4">
+            <input
+              type="question"
+              name="question"
+              id="question"
+              value={formData.question}
+              onChange={(e) =>
+                setFormData({ ...formData, question: e.target.value })
+              }
+              className="block py-2.5 px-0 w-full text-md text-black bg-transparent border-0 border-b-[1.5px] border-black appearance-none dark:text-black dark:border-black dark:focus:border-[#E589E5] focus:outline-none focus:ring-0 focus:border-[#E589E5] peer"
+              placeholder=" "
+              required
+            />
+            <label className="peer-focus:font-medium absolute text-sm text-gray-900 dark:text-gray-900 duration-[300ms] transform -translate-y-6 scale-75 top-4 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-[#8f589e] peer-focus:dark:text-[#8f589e] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+              Desciption
+            </label>
           </div>
           <p className={`w-full text-[13px] ${poppins400.className}`}>
             <Link href="/login" className="hover:underline">
