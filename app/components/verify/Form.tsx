@@ -2,6 +2,9 @@
 import { FC, useState } from "react";
 import { Button } from "../button/Button";
 import { Poppins } from "next/font/google";
+import { verifyImage } from "@/app/actions/replicate/verifyImage";
+import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 interface FormProps {
   email: string;
@@ -12,12 +15,22 @@ const poppins400 = Poppins({
   weight: ["400"],
 });
 
-
 const Form: FC<FormProps> = ({ email }) => {
   const [desc, setDec] = useState("");
+  const router = useRouter();
 
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
+    const verify = await verifyImage({ answer: desc, email });
+    if (!verify) {
+      signOut({
+        callbackUrl: "/login",
+        redirect: true,
+      });
+    }
+    if (verify) {
+      router?.push("/dashboard");
+    }
   };
   return (
     <>
