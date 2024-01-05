@@ -1,3 +1,5 @@
+"use server"
+
 import OpenAI from "openai";
 
 export async function checkRegistrationPrompt(prompt: string) {
@@ -17,7 +19,7 @@ export async function checkRegistrationPrompt(prompt: string) {
         model: "gpt-3.5-turbo",
     });
     const res = completion.choices[0].message.content;
-    console.log("RESSS")
+    console.log("RESPONSE")
     console.log(res)
     if (res?.toLowerCase() === "yes" || res?.toLowerCase() === "yes.") {
         return true;
