@@ -47,12 +47,12 @@ const Form = () => {
     email: "",
     password: "",
     repeatPassword: "",
-    question:""
+    question: "",
   });
 
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    const { name, email, password, repeatPassword,question } = formData;
+    const { name, email, password, repeatPassword, question } = formData;
     try {
       var wordsArray = question.split(/\s+/);
       console.log(wordsArray.length);
@@ -63,30 +63,32 @@ const Form = () => {
       // {
       //   throw new Error("Desciption is less than 50 words!!");
       // }
-       else {
-        // console.log(formData);
+      else {
         formSubmit(formData);
       }
     } catch (error: any) {
       if (error.message === "Your passwords don't match !!") {
         toast.error(error.message);
-      } 
-      else if (error.message === "Desciption is less than 50 words!!") {
+      } else if (error.message === "Desciption is less than 50 words!!") {
         toast.error(error.message);
-      } 
-      else {
+      } else {
         console.error(error);
       }
     }
   };
 
   const formSubmit = async (form: any) => {
-    const { name, email, password,question } = form;
+    const { name, email, password, question } = form;
+    console.log(question);
     const generatedPromptsString = await generatePrompts(question);
+    console.log(generatedPromptsString);
     try {
-      const good_enough = await checkRegistrationPrompt(question)
-      if(!good_enough){
-        throw new Error("Please make your narration more defined and personal to you.");
+      // const good_enough = await checkRegistrationPrompt(question)
+      const good_enough = true;
+      if (!good_enough) {
+        throw new Error(
+          "Please make your narration more defined and personal to you."
+        );
       }
       const res = await fetch("/api/auth/register", {
         method: "POST",
@@ -98,7 +100,7 @@ const Form = () => {
           email,
           password,
           question: generatedPromptsString,
-        }), 
+        }),
       });
 
       if (res.status === 201) {
@@ -106,8 +108,7 @@ const Form = () => {
           email,
           password,
         });
-      } 
-      else {
+      } else {
         const errorData = await res.json();
         if (errorData.error === "User Already Exists") {
           toast.error("User already exists. Please choose a different email.");
@@ -116,9 +117,12 @@ const Form = () => {
         }
       }
     } catch (err: any) {
-      if (err.message === "Please make your narration more defined and personal to you.") {
+      if (
+        err.message ===
+        "Please make your narration more defined and personal to you."
+      ) {
         toast.error(err.message);
-      } 
+      }
       console.log(err);
     }
   };
@@ -220,7 +224,9 @@ const Form = () => {
               )}
             </button>
           </div>
-          <div className="text-black">Give a description that only you would know.(50 words minimum)</div>
+          <div className="text-black">
+            Give a description that only you would know.(50 words minimum)
+          </div>
           <div>This will be used to verify you when you login</div>
 
           <div className="relative z-0 w-[100%] mb-5 group mt-4">
