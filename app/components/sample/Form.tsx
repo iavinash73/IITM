@@ -21,12 +21,12 @@ const Form: FC<FormProps> = ({}) => {
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
     const generatedPromptsString = await generatePrompts(question);
-    // const good_enough = await checkRegistrationPrompt(question);
-    // if (!good_enough) {
-    //   throw new Error(
-    //     "Please make your narration more defined and personal to you."
-    //   );
-    // }
+    const good_enough = await checkRegistrationPrompt(question);
+    if (!good_enough) {
+      throw new Error(
+        "Please make your narration more defined and personal to you."
+      );
+    }
     console.log(generatedPromptsString);
     const res = await fetch("/api/auth/change", {
       method: "POST",

@@ -83,8 +83,7 @@ const Form = () => {
     const generatedPromptsString = await generatePrompts(question);
     console.log(generatedPromptsString);
     try {
-      // const good_enough = await checkRegistrationPrompt(question)
-      const good_enough = true;
+      const good_enough = await checkRegistrationPrompt(question)
       if (!good_enough) {
         throw new Error(
           "Please make your narration more defined and personal to you."
