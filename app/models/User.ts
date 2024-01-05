@@ -15,23 +15,10 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    forgotPasswordToken: {
+    question: {
       type: String,
-    },
-    forgotPasswordTokenExpiry: {
-      type: Date,
-    },
-    emailVerified: {
-      type: Boolean,
       default: false,
     },
-    details: {
-      type: Boolean,
-      default: false,
-    },
-    emailVerificationToken: {
-      type: String,
-    }
   },
   { timestamps: true },
 );
