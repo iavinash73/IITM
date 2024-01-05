@@ -37,7 +37,7 @@ const Form = () => {
   const session = useSession();
 
   if (session.status === "authenticated") {
-    router?.push("/verify-email");
+    router?.push("/question");
   }
 
   const [formData, setFormData] = useState({
