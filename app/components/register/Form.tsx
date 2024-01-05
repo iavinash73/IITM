@@ -1,4 +1,5 @@
 "use client";
+import { checkRegistrationPrompt } from "@/app/actions/replicate/checkRegistrationPrompt";
 import { generatePrompts } from "@/app/actions/replicate/generatePrompts";
 import { Button } from "@/app/components/button/Button";
 import eye from "@/public/auth/eye.png";
@@ -83,6 +84,10 @@ const Form = () => {
     const { name, email, password,question } = form;
     const generatedPromptsString = await generatePrompts(question);
     try {
+      const good_enough = await checkRegistrationPrompt(question)
+      if(!good_enough){
+        throw new Error("Please make your narration more defined and personal to you.");
+      }
       const res = await fetch("/api/auth/register", {
         method: "POST",
         headers: {
@@ -111,6 +116,9 @@ const Form = () => {
         }
       }
     } catch (err: any) {
+      if (err.message === "Please make your narration more defined and personal to you.") {
+        toast.error(err.message);
+      } 
       console.log(err);
     }
   };
