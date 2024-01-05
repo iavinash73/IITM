@@ -19,5 +19,9 @@ export async function checkRegistrationPrompt(prompt: string) {
     const res = completion.choices[0].message.content;
     console.log("RESSS")
     console.log(res)
-    return res;
+    if (res?.toLowerCase() === "yes" || res?.toLowerCase() === "yes.") {
+        return true;
+    } else {
+        return false;
+    }
 }
