@@ -12,7 +12,8 @@ export async function verifyImage({answer, email}: {answer: string, email: strin
       });
     
     const res = completion.choices[0].message.content;
-    if (res === "yes") {
+    console.log(res);
+    if (res?.toLowerCase() === "yes" || res?.toLowerCase() === "yes.") {
         return true;
     } else {
         return false;
