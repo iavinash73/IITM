@@ -130,7 +130,7 @@ const Form = () => {
     <>
       <form className="" onSubmit={handleSubmit} autoComplete="off">
         <div className={`text-[34px] ${poppins600.className} mb-3`}>
-          Register with your email
+          Registerrrr with your email
         </div>
         <div className={`${poppins400.className}`}>
           <div className="relative z-0 w-[100%] mb-5 group">
