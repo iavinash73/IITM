@@ -28,14 +28,6 @@ export default function Login() {
       ></Image>
       <div className="p-10 backdrop-blur-sm bg-white bg-opacity-[0.15] rounded-xl flex items-center justify-center flex-col">
         <Form />
-        <div className="flex items-center w-[50%] mx-auto mb-6 mt-4">
-          <hr className="flex-grow border-t border-gray-700" />
-          <span className={`mx-3 text-gray-900 ${outfit500.className}`}>
-            OR
-          </span>
-          <hr className="flex-grow border-t border-gray-700" />
-        </div>
-        <GoogleButton />
       </div>
     </div>
   );

@@ -44,7 +44,7 @@ const Form = () => {
   // }, [params]);
 
   if (session.status === "authenticated") {
-    router?.push("/dashboard");
+    router?.push("/verify");
   }
 
   const handleSubmit = async (event: { preventDefault: () => void }) => {
