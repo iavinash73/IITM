@@ -13,8 +13,9 @@ const page: FC<pageProps> = async ({}) => {
   if (!session) {
       redirect("/login/?callbackUrl=/verify");
   } 
-
-  const image = await generateImage("");
+  let user = await User.findOne({email: session.user?.email});
+  console.log(user.question);
+  const image = await generateImage(user.question);
   console.log(image);
   return <div className='items-center flex h-screen'>
     <Image src={image[0]} width={500} height={500} alt="prompt" />
